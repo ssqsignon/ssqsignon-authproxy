@@ -1,2 +1,6 @@
 .idea/
 nodejs/node_modules/
+aspnet/packages/
+aspnet/SSQSignonAuthProxy/obj/
+aspnet/SSQSignonAuthProxy/bin/
+*.nupkg
