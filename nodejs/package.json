@@ -1,0 +1,42 @@
+{
+  "name": "ssqsignon-auth-proxy",
+  "version": "1.0.2",
+  "description": "A connect middleware (e.g. for express.js) that proxies requests to the ssqsignon /auth endpoint.",
+  "main": "ssqsignon-authproxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rivierasolutions/ssqsignon-authproxy.git"
+  },
+  "keywords": [
+    "ssq",
+    "ssqsignon",
+    "auth",
+    "proxy",
+    "authorization",
+    "sso",
+    "slave",
+    "confidential",
+    "client",
+    "secret",
+    "authorization",
+    "code"
+  ],
+  "author": {
+    "name": "Piotr Wójcik",
+    "email": "piotr.wojcik@rivierasolutions.pl",
+    "url": "http://rivierasolutions.pl"
+  },
+  "licenses": [
+      {
+          "type": "MIT",
+          "url": "http://www.opensource.org/licenses/MIT"
+      }
+  ],
+  "bugs": {
+    "url": "https://github.com/rivierasolutions/ssqsignon-authproxy/issues"
+  },
+  "homepage": "https://github.com/rivierasolutions/ssqsignon-authproxy#readme"
+}
