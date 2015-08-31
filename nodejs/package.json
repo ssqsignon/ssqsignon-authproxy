@@ -1,6 +1,6 @@
 {
   "name": "ssqsignon-auth-proxy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A connect middleware (e.g. for express.js) that proxies requests to the ssqsignon /auth endpoint.",
   "main": "ssqsignon-authproxy.js",
   "scripts": {

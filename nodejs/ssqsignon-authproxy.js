@@ -12,7 +12,7 @@ module.exports = function ssqSignonAuthProxy(moduleName, clientId, clientSecret)
                     host: 'tinyusers.azurewebsites.net',
                     path: [ '', moduleName, 'auth' ].join('/'),
                     auth: [ clientId, clientSecret ].join(':'),
-                    headers: { 'Content-Type': parentReq.get('Content-Type'), 'Content-Length': body.length }
+                    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': body.length }
                 }, function(response) {
                     var data = '';
                     response.on('data', function(chunk) {
