@@ -9,7 +9,7 @@ module.exports = function ssqSignonAuthProxy(moduleName, clientId, clientSecret)
             getBody(parentReq, function(err, body) {
                 var req = https.request({
                     method: 'POST',
-                    host: 'tinyusers.azurewebsites.net',
+                    host: 'ssqsignon.com',
                     path: [ '', moduleName, 'auth' ].join('/'),
                     auth: [ clientId, clientSecret ].join(':'),
                     headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': body.length }

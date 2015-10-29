@@ -36,7 +36,7 @@ namespace SSQSignon
             ModuleName = moduleName;
             ClientId = clientId;
             ClientSecret = clientSecret;
-            restClient = new RestClient(string.Format("https://tinyusers.azurewebsites.net/{0}/auth", moduleName));
+            restClient = new RestClient(string.Format("https://ssqsignon.com/{0}/auth", moduleName));
             if (!string.IsNullOrEmpty(clientSecret))
             {
                 restClient.Authenticator = new RestSharp.Authenticators.HttpBasicAuthenticator(clientId, clientSecret);
