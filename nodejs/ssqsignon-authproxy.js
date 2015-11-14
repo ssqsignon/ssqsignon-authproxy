@@ -5,6 +5,7 @@ module.exports = function ssqSignonAuthProxy(moduleName, clientId, clientSecret)
 
     return [
         bodyParser.json(),
+        bodyParser.urlencoded({ extended: true }),
         function(parentReq, res) {
             getBody(parentReq, function(err, body) {
                 var req = https.request({
