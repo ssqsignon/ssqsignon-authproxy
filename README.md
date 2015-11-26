@@ -30,6 +30,16 @@ and the *client id* and *client secret* of the desired client in your *module*.
 From now on all requests to `/myauth` will be forwarded to `https://ssqsignon.com/my-module-name/auth`, and their respective 
 responses returned.
 
+#### SsqSignonAuthProxy(moduleName, clientId, clientSecret, grantTypeDetection)
+
+- *moduleName (string)*: The name of the module to proxy to.
+- *clientId (string)*: The id of the client to proxy as. If a *client_id* is not present is the request it will be automatically appended.
+- *clientSecret (string)*: The secret of the client to proxy as. If set the client id and secret will be appended as basic authentication to each request.
+- *grantTypeDetection (bool)*: If set to a truthy value, the proxy will try to figure out the grant type if the *grant_type* field is empty, i.e.
+    - when either *username* or *password* fields are set, it will set the grant type as *password*.
+    - when the *code* field is set, it will set the grant type to *authorization_code*.
+    - when the *refresh_token* field is set, it will set the grant type to *refresh_token*.
+
 ## ASP.Net Web API 2
 
 ### Install
@@ -54,6 +64,16 @@ All you have to is inherit your controller from `AuthProxyController` and specif
     
 From now on all requests to `MyAuthController` will be forwarded to `https://ssqsignon.com/my-module-name/auth`, and their respective 
 responses returned.
+
+#### AuthProxyController(moduleName, clientId, clientSecret, grantTypeDetection)
+
+- *moduleName (string)*: The name of the module to proxy to.
+- *clientId (string)*: The id of the client to proxy as. If a *client_id* is not present is the request it will be automatically appended.
+- *clientSecret (string)*: The secret of the client to proxy as. If set the client id and secret will be appended as basic authentication to each request.
+- *grantTypeDetection (bool, defaults to false)*: If set to true, the proxy will try to figure out the grant type if the *grant_type* field is empty, i.e.
+    - when either *username* or *password* fields are set, it will set the grant type as *password*.
+    - when the *code* field is set, it will set the grant type to *authorization_code*.
+    - when the *refresh_token* field is set, it will set the grant type to *refresh_token*.
 
 ## How it works
 

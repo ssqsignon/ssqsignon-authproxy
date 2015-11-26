@@ -31,11 +31,12 @@ namespace SSQSignon
             public string client_secret { get; set; }
         }
 
-        public AuthProxyController(string moduleName, string clientId, string clientSecret)
+        public AuthProxyController(string moduleName, string clientId, string clientSecret, bool grantTypeDetection = false)
         {
             ModuleName = moduleName;
             ClientId = clientId;
             ClientSecret = clientSecret;
+            GrantTypeDetection = grantTypeDetection;
             restClient = new RestClient(string.Format("https://ssqsignon.com/{0}/auth", moduleName));
             if (!string.IsNullOrEmpty(clientSecret))
             {
@@ -46,6 +47,14 @@ namespace SSQSignon
         public virtual dynamic Post(AuthRequestModel model)
         {
             var request = new RestRequest(Method.POST);
+            if (string.IsNullOrEmpty(model.client_id))
+            {
+                model.client_id = ClientId;
+            }
+            if (string.IsNullOrEmpty(model.grant_type) && GrantTypeDetection)
+            {
+                model.grant_type = DetectGrantType(model);
+            }
             request.AddJsonBody(model);
 
             var response = restClient.Execute<AuthorizationResponse>(request);
@@ -55,8 +64,28 @@ namespace SSQSignon
             }
             else
             {
-                return StatusCode(HttpStatusCode.BadGateway);
+                var responseProxy = new HttpResponseMessage(response.StatusCode);
+                var mimeType = new System.Net.Mime.ContentType(response.ContentType);
+                responseProxy.Content = new StringContent(response.Content, System.Text.Encoding.GetEncoding(mimeType.CharSet), mimeType.MediaType);
+                return responseProxy;
             }
+        }
+
+        protected virtual string DetectGrantType(AuthRequestModel model)
+        {
+            if (!string.IsNullOrEmpty(model.username) || !string.IsNullOrEmpty(model.password))
+            {
+                return "password";
+            }
+            if (!string.IsNullOrEmpty(model.code))
+            {
+                return "authorization_code";
+            }
+            if (!string.IsNullOrEmpty(model.refresh_token))
+            {
+                return "refresh_token";
+            }
+            return null;
         }
 
         protected string ModuleName { get; set; }
@@ -64,6 +93,8 @@ namespace SSQSignon
         protected string ClientId { get; set; }
 
         protected string ClientSecret { get; set; }
+
+        protected bool GrantTypeDetection { get; set; }
 
         private class AuthorizationResponse
         {
