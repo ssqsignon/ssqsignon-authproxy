@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace SSQSignon
 {
-    public abstract class AuthProxyController : ApiController
+    public abstract class ProxyController : ApiController
     {
         public class AuthRequestModel
         {
@@ -31,7 +31,7 @@ namespace SSQSignon
             public string client_secret { get; set; }
         }
 
-        public AuthProxyController(string moduleName, string clientId, string clientSecret, bool grantTypeDetection = false)
+        public ProxyController(string moduleName, string clientId, string clientSecret, bool grantTypeDetection = false)
         {
             ModuleName = moduleName;
             ClientId = clientId;
